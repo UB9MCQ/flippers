@@ -41,6 +41,7 @@ extern int32_t usb_mouse_app(void* p);
 extern int32_t usb_test_app(void* p);
 extern int32_t vibro_test_app(void* p);
 extern int32_t bt_hid_app(void* p);
+extern int32_t esp_deauch_app(void* p);
 extern int32_t battery_test_app(void* p);
 
 // Plugins
@@ -152,6 +153,10 @@ const FlipperApplication FLIPPER_APPS[] = {
     {.app = bad_usb_app, .name = "Bad USB", .stack_size = 2048, .icon = &A_BadUsb_14},
 #endif
 
+#ifdef ESP_DEAUCH
+    {.app = esp_deauch_app, .name = "ESP DEAUCH", .stack_size = 2048, .icon = &A_Sub1ghz_14},
+#endif
+
 #ifdef APP_U2F
     {.app = u2f_app, .name = "U2F", .stack_size = 2048, .icon = &A_U2F_14},
 #endif
@@ -166,6 +171,10 @@ const FlipperOnStartHook FLIPPER_ON_SYSTEM_START[] = {
 
 #ifdef APP_INFRARED
     infrared_on_system_start,
+#endif
+
+#ifdef ESP_DEAUCH
+esp_deauch_system_start,
 #endif
 
 #ifdef APP_NFC
